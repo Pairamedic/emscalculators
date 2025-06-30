@@ -271,15 +271,15 @@ function toggleConversions() {
     }
 }
 
-    function calculateMedAdmin() {
-        let dose = parseFloat(document.getElementById('medDose').value);
-        let volume = parseFloat(document.getElementById('medVolume').value);
-        let concentration = parseFloat(document.getElementById('medConcentration').value);
-        if (!isNaN(dose) && !isNaN(volume) && !isNaN(concentration) && concentration > 0) {
-            let result = ((dose / 1000) * volume * weight * drip) / concentration;
-            document.getElementById('medResult').innerText = "Draw up: " + result.toFixed(2) + " mL";
-        }
+function calculateMedAdmin() {
+    let dose = parseFloat(document.getElementById('medDose').value);
+    let volume = parseFloat(document.getElementById('medVolume').value);
+    let concentration = parseFloat(document.getElementById('medConcentration').value);
+    if (!isNaN(dose) && !isNaN(volume) && !isNaN(concentration) && concentration > 0) {
+        let result = (dose * volume) / concentration;
+        document.getElementById('medResult').innerText = "Draw up: " + result.toFixed(2) + " mL";
     }
+}
 
     function calculateIVInfusion() {
         let dose = parseFloat(document.getElementById('ivDose').value);
@@ -489,7 +489,8 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
     document.getElementById('rtsResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Coded score from GCS, SBP, RR</i>');
     document.getElementById('strokeResult').insertAdjacentHTML('beforeend', '<br><i>Any abnormal = positive; 3 signs tested</i>');
 
-    <div class="calculator" data-name="Oxygen Duration">
+</script>
+ <div class="calculator" data-name="Oxygen Duration">
         <h2>Oxygen Duration</h2>
         <label>Tank Factor (e.g., D=0.16, E=0.28)</label>
         <input type="number" step="any" id="o2Factor">
@@ -622,7 +623,7 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
     </div>
 </div>
     </div>
-</script>
+    
 </body>
 </html>
     
