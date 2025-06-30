@@ -658,6 +658,22 @@ function convertUnits() {
     </div>
 </div>
     </div>
+    window.onload = function() {
+    document.getElementById('medResult').innerText += "\nFormula: (Dose × Volume) ÷ Concentration";
+    document.getElementById('ivResult').innerText += "\nFormula: (Dose × Volume × Weight × Drip) ÷ Concentration";
+    document.getElementById('fluidResult').innerText += "\nFormula: (Volume × Drip Set) ÷ Time";
+    document.getElementById('burnResult').innerText += "\nFormula: 4 × Weight × %Burn = Total Volume (half in first 8h)";
+    document.getElementById('gcsResult').innerText += "\nFormula: Eye + Verbal + Motor";
+    document.getElementById('apgarResult').innerText += "\nFormula: Sum of all 5 category scores";
+    document.getElementById('o2Result').innerText += "\nFormula: (Tank PSI - 200) × Factor ÷ Flow Rate";
+    document.getElementById('mapResult').innerText += "\nFormula: (SBP + 2 × DBP) ÷ 3";
+    document.getElementById('ventResult').innerText += "\nFormula: IBW = 50+2.3(height-60) male or 45.5+2.3(height-60) female | TV = IBW × 6–8";
+    document.getElementById('tubeResult').innerText += "\nFormula: (Age ÷ 4) + 3.5";
+    document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
+    document.getElementById('rsiResult').innerText += "\nFormulas: Drug × weight (kg)";
+    document.getElementById('rtsResult').innerText += "\nFormulas: Coded score from GCS, SBP, RR";
+    document.getElementById('strokeResult').innerText += "\nFormula: 3-point stroke screen: Face, Arm, Speech";
+};
     </script>
 </body>
 </html>
