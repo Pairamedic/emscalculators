@@ -67,6 +67,8 @@
 
 <input class="search-box" type="text" id="search" placeholder="Search calculators..." onkeyup="filterCalculators()">
 <a onclick="toggleReference()">📘 View Conversion Reference Table</a>
+<a onclick="toggleConversions()">🧮 Conversion Calculators</a>
+
 
 <div id="referenceTable">
     <h2>Standard Medical Conversions</h2>
@@ -416,6 +418,11 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
         }
     }
 
+    function toggleConversions() {
+    const section = document.getElementById("conversionCalculators");
+    section.style.display = section.style.display === "none" ? "block" : "none";
+}
+
     function calculateStroke() {
         let face = parseInt(document.getElementById('strokeFace').value);
         let arm = parseInt(document.getElementById('strokeArm').value);
@@ -425,6 +432,7 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
         document.getElementById('strokeResult').innerText = 
             "Findings: " + total + "/3 positive\nIf any are positive, stroke is suspected.\nCincinnati: Facial droop, Arm drift, Speech abnormal.";
     }
+    
 
     document.getElementById('medResult').insertAdjacentHTML('beforeend', '<br><i>Formula: (Dose × Volume) ÷ Concentration</i>');
     document.getElementById('ivResult').insertAdjacentHTML('beforeend', '<br><i>Formula: (Dose × Volume × Weight × Drip) ÷ Concentration</i>');
@@ -538,4 +546,47 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
         <button onclick="calculateStroke()">Evaluate Stroke</button>
         <div class="result" id="strokeResult"></div>
     </div>
+
+<div id="conversionCalculators" style="display: none; background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
+    <h2>Conversion Calculators</h2>
+
+    <!-- Pounds to Kilograms -->
+    <div class="calculator" data-name="Pounds to Kilograms">
+        <h3>Pounds to Kilograms</h3>
+        <label>Weight (lbs)</label>
+        <input type="number" id="lbsInput">
+        <button onclick="convertLbsToKg()">Convert</button>
+        <div class="result" id="lbsResult"></div>
+    </div>
+
+    <!-- Celsius to Fahrenheit -->
+    <div class="calculator" data-name="Celsius to Fahrenheit">
+        <h3>Celsius to Fahrenheit</h3>
+        <label>Temperature (°C)</label>
+        <input type="number" id="celsiusInput">
+        <button onclick="convertCelsius()">Convert</button>
+        <div class="result" id="celsiusResult"></div>
+    </div>
+
+    <!-- Unit Converter -->
+    <div class="calculator" data-name="Metric Unit Converter">
+        <h3>Metric Unit Converter</h3>
+        <label>Value</label>
+        <input type="number" id="unitValue">
+        <label>From</label>
+        <select id="unitFrom">
+            <option value="g">Grams (g)</option>
+            <option value="mg">Milligrams (mg)</option>
+            <option value="mcg">Micrograms (mcg)</option>
+        </select>
+        <label>To</label>
+        <select id="unitTo">
+            <option value="g">Grams (g)</option>
+            <option value="mg">Milligrams (mg)</option>
+            <option value="mcg">Micrograms (mcg)</option>
+        </select>
+        <button onclick="convertUnits()">Convert</button>
+        <div class="result" id="unitResult"></div>
+    </div>
+</div>
 
