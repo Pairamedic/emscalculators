@@ -622,6 +622,46 @@ function convertUnits() {
     document.getElementById('rsiResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Drug × weight (kg)</i>');
     document.getElementById('rtsResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Coded score from GCS, SBP, RR</i>');
     document.getElementById('strokeResult').insertAdjacentHTML('beforeend', '<br><i>Any abnormal = positive; 3 signs tested</i>');
+
+function convertLbsToKg() {
+    let lbs = parseFloat(document.getElementById('lbsInput').value);
+    if (!isNaN(lbs)) {
+        let kg = lbs * 0.453592;
+        document.getElementById('lbsResult').innerText = lbs + " lbs = " + kg.toFixed(2) + " kg";
+    }
+}
+
+function convertCelsius() {
+    let celsius = parseFloat(document.getElementById('celsiusInput').value);
+    if (!isNaN(celsius)) {
+        let fahrenheit = (celsius * 9/5) + 32;
+        document.getElementById('celsiusResult').innerText = celsius + "°C = " + fahrenheit.toFixed(1) + "°F";
+    }
+}
+
+function convertUnits() {
+    let value = parseFloat(document.getElementById('unitValue').value);
+    let from = document.getElementById('unitFrom').value;
+    let to = document.getElementById('unitTo').value;
+    
+    if (!isNaN(value)) {
+        let grams;
+
+        // Convert to grams first
+        if (from === "g") grams = value;
+        else if (from === "mg") grams = value / 1000;
+        else if (from === "mcg") grams = value / 1_000_000;
+
+        // Convert grams to target
+        let result;
+        if (to === "g") result = grams;
+        else if (to === "mg") result = grams * 1000;
+        else if (to === "mcg") result = grams * 1_000_000;
+
+        document.getElementById('unitResult').innerText = 
+            value + " " + from + " = " + result.toFixed(2) + " " + to;
+    }
+}
 </script>
 </body>
 </html>
