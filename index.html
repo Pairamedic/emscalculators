@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMS Calculator Suite</title> 
+    <title>EMS Calculator Suite</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,48 +83,6 @@
 </div>
 
 <div id="calculator-container">
-
-    <div id="conversionCalculators" style="display: none; background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
-    <h2>Conversion Calculators</h2>
-
-    <!-- Pounds to Kilograms -->
-    <div class="calculator" data-name="Pounds to Kilograms">
-        <h3>Pounds to Kilograms</h3>
-        <label>Weight (lbs)</label>
-        <input type="number" id="lbsInput">
-        <button onclick="convertLbsToKg()">Convert</button>
-        <div class="result" id="lbsResult"></div>
-    </div>
-
-    <!-- Celsius to Fahrenheit -->
-    <div class="calculator" data-name="Celsius to Fahrenheit">
-        <h3>Celsius to Fahrenheit</h3>
-        <label>Temperature (°C)</label>
-        <input type="number" id="celsiusInput">
-        <button onclick="convertCelsius()">Convert</button>
-        <div class="result" id="celsiusResult"></div>
-    </div>
-
-    <!-- Unit Converter -->
-    <div class="calculator" data-name="Metric Unit Converter">
-        <h3>Metric Unit Converter</h3>
-        <label>Value</label>
-        <input type="number" id="unitValue">
-        <label>From</label>
-        <select id="unitFrom">
-            <option value="g">Grams (g)</option>
-            <option value="mg">Milligrams (mg)</option>
-            <option value="mcg">Micrograms (mcg)</option>
-        </select>
-        <label>To</label>
-        <select id="unitTo">
-            <option value="g">Grams (g)</option>
-            <option value="mg">Milligrams (mg)</option>
-            <option value="mcg">Micrograms (mcg)</option>
-        </select>
-        <button onclick="convertUnits()">Convert</button>
-        <div class="result" id="unitResult"></div>
-    </div>
 
     <div class="calculator" data-name="Medication Administration">
         <h2>Medication Administration</h2>
@@ -262,6 +220,7 @@
 </div>
     
 </div>
+
 <script>
     function filterCalculators() {
         let input = document.getElementById('search').value.toLowerCase();
@@ -502,43 +461,7 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
         }
     }
 
-function convertLbsToKg() {
-    let lbs = parseFloat(document.getElementById('lbsInput').value);
-    if (!isNaN(lbs)) {
-        let kg = lbs * 0.453592;
-        document.getElementById('lbsResult').innerText = "Kilograms: " + kg.toFixed(2) + " kg";
-    }
-}
 
-function convertCelsius() {
-    let celsius = parseFloat(document.getElementById('celsiusInput').value);
-    if (!isNaN(celsius)) {
-        let fahrenheit = (celsius * 9/5) + 32;
-        document.getElementById('celsiusResult').innerText = "Fahrenheit: " + fahrenheit.toFixed(1) + " °F";
-    }
-}
-
-function convertUnits() {
-    let value = parseFloat(document.getElementById('unitValue').value);
-    let from = document.getElementById('unitFrom').value;
-    let to = document.getElementById('unitTo').value;
-
-    if (!isNaN(value)) {
-        // Convert input to grams
-        let grams;
-        if (from === "g") grams = value;
-        if (from === "mg") grams = value / 1000;
-        if (from === "mcg") grams = value / 1_000_000;
-
-        // Convert grams to output unit
-        let result;
-        if (to === "g") result = grams;
-        if (to === "mg") result = grams * 1000;
-        if (to === "mcg") result = grams * 1_000_000;
-
-        document.getElementById('unitResult').innerText = "Converted: " + result.toFixed(2) + " " + to;
-    }
-}
 
     function calculateStroke() {
         let face = parseInt(document.getElementById('strokeFace').value);
@@ -565,7 +488,13 @@ function convertUnits() {
     document.getElementById('rsiResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Drug × weight (kg)</i>');
     document.getElementById('rtsResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Coded score from GCS, SBP, RR</i>');
     document.getElementById('strokeResult').insertAdjacentHTML('beforeend', '<br><i>Any abnormal = positive; 3 signs tested</i>');
+</script>
+</body>
+</html>
+</script>
 
+</body>
+</html>
     <div class="calculator" data-name="Oxygen Duration">
         <h2>Oxygen Duration</h2>
         <label>Tank Factor (e.g., D=0.16, E=0.28)</label>
@@ -656,9 +585,46 @@ function convertUnits() {
         </select>
         <button onclick="calculateStroke()">Evaluate Stroke</button>
         <div class="result" id="strokeResult"></div>
-</div>
+        <div id="conversionCalculators" style="display: none; background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
+    <h2>Conversion Calculators</h2>
+
+    <!-- Pounds to Kilograms -->
+    <div class="calculator" data-name="Pounds to Kilograms">
+        <h3>Pounds to Kilograms</h3>
+        <label>Weight (lbs)</label>
+        <input type="number" id="lbsInput">
+        <button onclick="convertLbsToKg()">Convert</button>
+        <div class="result" id="lbsResult"></div>
     </div>
 
-</script>
-</body>
-</html>
+    <!-- Celsius to Fahrenheit -->
+    <div class="calculator" data-name="Celsius to Fahrenheit">
+        <h3>Celsius to Fahrenheit</h3>
+        <label>Temperature (°C)</label>
+        <input type="number" id="celsiusInput">
+        <button onclick="convertCelsius()">Convert</button>
+        <div class="result" id="celsiusResult"></div>
+    </div>
+
+    <!-- Unit Converter -->
+    <div class="calculator" data-name="Metric Unit Converter">
+        <h3>Metric Unit Converter</h3>
+        <label>Value</label>
+        <input type="number" id="unitValue">
+        <label>From</label>
+        <select id="unitFrom">
+            <option value="g">Grams (g)</option>
+            <option value="mg">Milligrams (mg)</option>
+            <option value="mcg">Micrograms (mcg)</option>
+        </select>
+        <label>To</label>
+        <select id="unitTo">
+            <option value="g">Grams (g)</option>
+            <option value="mg">Milligrams (mg)</option>
+            <option value="mcg">Micrograms (mcg)</option>
+        </select>
+        <button onclick="convertUnits()">Convert</button>
+        <div class="result" id="unitResult"></div>
+    </div>
+</div>
+    </div>
