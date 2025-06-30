@@ -111,6 +111,14 @@
         <div class="result" id="ivResult"></div>
     </div>
 
+    <div class="calculator" data-name="10-Second Drip Timing">
+    <h2>Manual Drip Timing (10-Second Count)</h2>
+    <label>Target Drip Rate (gtts/min)</label>
+    <input type="number" id="dripRateInput">
+    <button onclick="calculateDripTiming()">Calculate Drops in 10 sec</button>
+    <div class="result" id="dripTimingResult"></div>
+</div>
+
     <div class="calculator" data-name="Fluid Over Time">
         <h2>Fluid Over Time</h2>
         <label>Volume (ml)</label>
@@ -382,6 +390,16 @@
             document.getElementById('ivResult').innerText = "IV Rate: " + result.toFixed(2) + " gtts/min";
         }
     }
+
+    function calculateDripTiming() {
+    let rate = parseFloat(document.getElementById('dripRateInput').value);
+    if (!isNaN(rate)) {
+        let dropsPer10sec = rate / 6;
+        document.getElementById('dripTimingResult').innerText = 
+            "Count " + dropsPer10sec.toFixed(1) + " drops in 10 seconds to achieve " + rate + " gtts/min.\n" +
+            "Formula: gtts/min ÷ 6 = drops per 10 sec";
+    }
+}
 
     function calculateFluidTime() {
         let volume = parseFloat(document.getElementById('fluidVolume').value);
