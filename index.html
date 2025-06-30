@@ -98,7 +98,7 @@
 
     <div class="calculator" data-name="IV Infusion">
         <h2>IV Infusion Rate</h2>
-        <label>Ordered Dose (µg/kg/min)</label>
+        <label>Ordered Dose (mg)</label>
         <input type="number" id="ivDose">
         <label>Volume (ml)</label>
         <input type="number" id="ivVolume">
@@ -111,14 +111,6 @@
         <button onclick="calculateIVInfusion()">Calculate gtts/min</button>
         <div class="result" id="ivResult"></div>
     </div>
-
-    <div class="calculator" data-name="Drip Timing Assistant">
-    <h2>Drip Timing Assistant</h2>
-    <label>Target Rate (gtts/min)</label>
-    <input type="number" id="dripTarget">
-    <button onclick="calculateDripTiming()">Calculate</button>
-    <div class="result" id="dripTimingResult"></div>
-</div>
 
     <div class="calculator" data-name="Fluid Over Time">
         <h2>Fluid Over Time</h2>
@@ -231,52 +223,17 @@
         });
     }
 
-    function calculateDripTiming() {
-    let target = parseFloat(document.getElementById('dripTarget').value);
-    if (!isNaN(target)) {
-        let per10 = target / 6;
-        let per15 = target / 4;
-        let per30 = target / 2;
-
-        document.getElementById('dripTimingResult').innerText = 
-            `Target Drips:\n` +
-            `• Every 10 sec: ${per10.toFixed(1)} gtts\n` +
-            `• Every 15 sec: ${per15.toFixed(1)} gtts\n` +
-            `• Every 30 sec: ${per30.toFixed(1)} gtts`;
-    }
-}
-
     function toggleReference() {
-    const ref = document.getElementById("referenceTable");
-    const conv = document.getElementById("conversionCalculators");
-
-    if (ref.style.display === "none") {
-        ref.style.display = "block";
-        conv.style.display = "none";
-    } else {
-        ref.style.display = "none";
+        var ref = document.getElementById("referenceTable");
+        ref.style.display = ref.style.display === "none" ? "block" : "none";
     }
-}
-
-function toggleConversions() {
-    const conv = document.getElementById("conversionCalculators");
-    const ref = document.getElementById("referenceTable");
-
-    if (conv.style.display === "none" || conv.style.display === "") {
-        conv.style.display = "block";
-        ref.style.display = "none";
-        conv.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-        conv.style.display = "none";
-    }
-}
 
     function calculateMedAdmin() {
         let dose = parseFloat(document.getElementById('medDose').value);
         let volume = parseFloat(document.getElementById('medVolume').value);
         let concentration = parseFloat(document.getElementById('medConcentration').value);
         if (!isNaN(dose) && !isNaN(volume) && !isNaN(concentration) && concentration > 0) {
-            let result = ((dose / 1000) * volume * weight * drip) / concentration;
+            let result = (dose * volume) / concentration;
             document.getElementById('medResult').innerText = "Draw up: " + result.toFixed(2) + " mL";
         }
     }
@@ -288,7 +245,7 @@ function toggleConversions() {
         let drip = parseFloat(document.getElementById('ivDrip').value);
         let concentration = parseFloat(document.getElementById('ivConcentration').value);
         if (!isNaN(dose) && !isNaN(volume) && !isNaN(weight) && !isNaN(drip) && !isNaN(concentration) && concentration > 0) {
-            let result = ((dose / 1000) * volume * weight * drip) / concentration;
+            let result = (dose * volume * weight * drip) / concentration;
             document.getElementById('ivResult').innerText = "IV Rate: " + result.toFixed(2) + " gtts/min";
         }
     }
@@ -461,42 +418,9 @@ document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
         }
     }
 
-function convertLbsToKg() {
-    let lbs = parseFloat(document.getElementById('lbsInput').value);
-    if (!isNaN(lbs)) {
-        let kg = lbs * 0.453592;
-        document.getElementById('lbsResult').innerText = "Kilograms: " + kg.toFixed(2) + " kg";
-    }
-}
-
-function convertCelsius() {
-    let celsius = parseFloat(document.getElementById('celsiusInput').value);
-    if (!isNaN(celsius)) {
-        let fahrenheit = (celsius * 9/5) + 32;
-        document.getElementById('celsiusResult').innerText = "Fahrenheit: " + fahrenheit.toFixed(1) + " °F";
-    }
-}
-
-function convertUnits() {
-    let value = parseFloat(document.getElementById('unitValue').value);
-    let from = document.getElementById('unitFrom').value;
-    let to = document.getElementById('unitTo').value;
-
-    if (!isNaN(value)) {
-        // Convert input to grams
-        let grams;
-        if (from === "g") grams = value;
-        if (from === "mg") grams = value / 1000;
-        if (from === "mcg") grams = value / 1_000_000;
-
-        // Convert grams to output unit
-        let result;
-        if (to === "g") result = grams;
-        if (to === "mg") result = grams * 1000;
-        if (to === "mcg") result = grams * 1_000_000;
-
-        document.getElementById('unitResult').innerText = "Converted: " + result.toFixed(2) + " " + to;
-    }
+    function toggleConversions() {
+    const section = document.getElementById("conversionCalculators");
+    section.style.display = section.style.display === "none" ? "block" : "none";
 }
 
     function calculateStroke() {
@@ -524,7 +448,13 @@ function convertUnits() {
     document.getElementById('rsiResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Drug × weight (kg)</i>');
     document.getElementById('rtsResult').insertAdjacentHTML('beforeend', '<br><i>Formulas: Coded score from GCS, SBP, RR</i>');
     document.getElementById('strokeResult').insertAdjacentHTML('beforeend', '<br><i>Any abnormal = positive; 3 signs tested</i>');
+</script>
+</body>
+</html>
+</script>
 
+</body>
+</html>
     <div class="calculator" data-name="Oxygen Duration">
         <h2>Oxygen Duration</h2>
         <label>Tank Factor (e.g., D=0.16, E=0.28)</label>
@@ -615,7 +545,9 @@ function convertUnits() {
         </select>
         <button onclick="calculateStroke()">Evaluate Stroke</button>
         <div class="result" id="strokeResult"></div>
-        <div id="conversionCalculators" style="display: none; background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
+    </div>
+
+<div id="conversionCalculators" style="display: none; background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
     <h2>Conversion Calculators</h2>
 
     <!-- Pounds to Kilograms -->
@@ -657,23 +589,3 @@ function convertUnits() {
         <div class="result" id="unitResult"></div>
     </div>
 </div>
-    </div>
-    window.onload = function() {
-    document.getElementById('medResult').innerText += "\nFormula: (Dose × Volume) ÷ Concentration";
-    document.getElementById('ivResult').innerText += "\nFormula: (Dose × Volume × Weight × Drip) ÷ Concentration";
-    document.getElementById('fluidResult').innerText += "\nFormula: (Volume × Drip Set) ÷ Time";
-    document.getElementById('burnResult').innerText += "\nFormula: 4 × Weight × %Burn = Total Volume (half in first 8h)";
-    document.getElementById('gcsResult').innerText += "\nFormula: Eye + Verbal + Motor";
-    document.getElementById('apgarResult').innerText += "\nFormula: Sum of all 5 category scores";
-    document.getElementById('o2Result').innerText += "\nFormula: (Tank PSI - 200) × Factor ÷ Flow Rate";
-    document.getElementById('mapResult').innerText += "\nFormula: (SBP + 2 × DBP) ÷ 3";
-    document.getElementById('ventResult').innerText += "\nFormula: IBW = 50+2.3(height-60) male or 45.5+2.3(height-60) female | TV = IBW × 6–8";
-    document.getElementById('tubeResult').innerText += "\nFormula: (Age ÷ 4) + 3.5";
-    document.getElementById('sbpResult').innerText += "\nFormula: 70 + (Age × 2)";
-    document.getElementById('rsiResult').innerText += "\nFormulas: Drug × weight (kg)";
-    document.getElementById('rtsResult').innerText += "\nFormulas: Coded score from GCS, SBP, RR";
-    document.getElementById('strokeResult').innerText += "\nFormula: 3-point stroke screen: Face, Arm, Speech";
-};
-    </script>
-</body>
-</html>
