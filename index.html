@@ -67,7 +67,6 @@
 
 <input class="search-box" type="text" id="search" placeholder="Search calculators..." onkeyup="filterCalculators()">
 <a onclick="toggleReference()">📘 View Conversion Reference Table</a>
-<a onclick="toggleConversions()">🧮 Conversion Calculators</a>
 
 
 <div id="referenceTable">
@@ -86,7 +85,7 @@
 
     <div class="calculator" data-name="Medication Administration">
         <h2>Medication Administration</h2>
-        <label>Ordered Dose (mg)</label>
+        <label>Ordered Dose (mcg)</label>
         <input type="number" id="medDose">
         <label>Volume (ml)</label>
         <input type="number" id="medVolume">
@@ -304,7 +303,7 @@
         <div class="result" id="strokeResult"></div>
     </div>
 
-<div id="conversionCalculators" style="display: none; background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
+<div id="conversionCalculators" style="background-color: #1e1e1e; border: 1px solid #90caf9; padding: 15px; margin-top: 20px; border-radius: 8px;">
     <h2>Conversion Calculators</h2>
 
     <!-- Pounds to Kilograms -->
