@@ -132,34 +132,83 @@
         <div class="result" id="burnResult"></div>
     </div>
 
-    <div class="calculator" data-name="GCS">
-        <h2>Glasgow Coma Scale (GCS)</h2>
-        <label>Eye Response (1-4)</label>
-        <input type="number" id="gcsEye" min="1" max="4">
-        <label>Verbal Response (1-5)</label>
-        <input type="number" id="gcsVerbal" min="1" max="5">
-        <label>Motor Response (1-6)</label>
-        <input type="number" id="gcsMotor" min="1" max="6">
-        <button onclick="calculateGCS()">Calculate GCS</button>
-        <div class="result" id="gcsResult"></div>
-    </div>
+<div class="calculator" data-name="GCS">
+    <h2>Glasgow Coma Scale (GCS)</h2>
+    
+    <label>Eye Response</label>
+    <select id="gcsEye">
+        <option value="4">Spontaneous</option>
+        <option value="3">To voice</option>
+        <option value="2">To pain</option>
+        <option value="1">No response</option>
+    </select>
 
-    <div class="calculator" data-name="APGAR">
-        <h2>APGAR Score</h2>
-        <label>Appearance (0-2)</label>
-        <input type="number" id="apgar1">
-        <label>Pulse (0-2)</label>
-        <input type="number" id="apgar2">
-        <label>Grimace (0-2)</label>
-        <input type="number" id="apgar3">
-        <label>Activity (0-2)</label>
-        <input type="number" id="apgar4">
-        <label>Respiration (0-2)</label>
-        <input type="number" id="apgar5">
-        <button onclick="calculateAPGAR()">Calculate APGAR</button>
-        <div class="result" id="apgarResult"></div>
-    </div>
+    <label>Verbal Response</label>
+    <select id="gcsVerbal">
+        <option value="5">Oriented</option>
+        <option value="4">Confused</option>
+        <option value="3">Inappropriate words</option>
+        <option value="2">Incomprehensible sounds</option>
+        <option value="1">No response</option>
+    </select>
 
+    <label>Motor Response</label>
+    <select id="gcsMotor">
+        <option value="6">Obeys commands</option>
+        <option value="5">Localizes pain</option>
+        <option value="4">Withdraws from pain</option>
+        <option value="3">Flexion to pain (decorticate)</option>
+        <option value="2">Extension to pain (decerebrate)</option>
+        <option value="1">No response</option>
+    </select>
+
+    <button onclick="calculateGCS()">Calculate GCS</button>
+    <div class="result" id="gcsResult"></div>
+</div>
+
+
+<div class="calculator" data-name="APGAR">
+    <h2>APGAR Score</h2>
+
+    <label>Appearance (Skin Color)</label>
+    <select id="apgar1">
+        <option value="2">Normal color all over</option>
+        <option value="1">Blue extremities, pink body (acrocyanosis)</option>
+        <option value="0">Blue/pale all over</option>
+    </select>
+
+    <label>Pulse (Heart Rate)</label>
+    <select id="apgar2">
+        <option value="2">≥ 100 bpm</option>
+        <option value="1">&lt; 100 bpm</option>
+        <option value="0">Absent</option>
+    </select>
+
+    <label>Grimace (Reflex Irritability)</label>
+    <select id="apgar3">
+        <option value="2">Pulls away, sneezes, coughs</option>
+        <option value="1">Facial movement only (grimace)</option>
+        <option value="0">No response</option>
+    </select>
+
+    <label>Activity (Muscle Tone)</label>
+    <select id="apgar4">
+        <option value="2">Active motion</option>
+        <option value="1">Some flexion of extremities</option>
+        <option value="0">Limp</option>
+    </select>
+
+    <label>Respiration</label>
+    <select id="apgar5">
+        <option value="2">Strong cry</option>
+        <option value="1">Weak/irregular breathing</option>
+        <option value="0">Absent</option>
+    </select>
+
+    <button onclick="calculateAPGAR()">Calculate APGAR</button>
+    <div class="result" id="apgarResult"></div>
+</div>
+    
 </div>
 
 <script>
